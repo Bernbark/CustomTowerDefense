@@ -11,10 +11,10 @@ public class UI_TextEvents : MonoBehaviour
 
     public TextMeshProUGUI goldText;
     public TextMeshProUGUI levelText;
-    public TextMeshProUGUI killsText, maxXPText, currentXPText;
+    public TextMeshProUGUI killsText, maxXPText, currentXPText, buildCostText;
     public event EventHandler OnGoldEarned;
     public Player player;
-    
+    public BuildingManager build;
     
     // Start is called before the first frame update
     void Start()
@@ -31,5 +31,6 @@ public class UI_TextEvents : MonoBehaviour
         killsText.text = "Kills: " + player.GetKills().ToString();
         maxXPText.text = "XP To Level: " + player.GetXPToLevel().ToString();
         currentXPText.text = "Current XP: " + player.GetCurrentXP().ToString();
+        buildCostText.text = "Build Cost: " + build.GetCost().ToString();
     }
 }

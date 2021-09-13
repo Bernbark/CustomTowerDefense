@@ -10,6 +10,7 @@ public class ButtonHandlin : MonoBehaviour
     public UI_TextEvents textEvents;
     public Player player;
     public EnemyBehavior enemy;
+    public BuildingManager buildingManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +39,7 @@ public class ButtonHandlin : MonoBehaviour
     public void SaveGameOnClick()
     {
         SaveGameManager.Instance.Save();
+        SaveSystem.SavePlayer(player);
     }
     
     public void LoadGameOnClick(Button button)
@@ -51,6 +53,7 @@ public class ButtonHandlin : MonoBehaviour
         player.SetCurrentXP(data.XPToLevel);
         */
         SaveGameManager.Instance.Load();
+        SaveSystem.LoadPlayer();
         //var graphToScan = AstarPath.active.data.gridGraph;
         //AstarPath.active.Scan(graphToScan);
         
@@ -60,10 +63,17 @@ public class ButtonHandlin : MonoBehaviour
     public void WipePlayerData(Button button)
     {
         player.SetDefaultStats();
-        
+        GameObject[] turrets = GameObject.FindGameObjectsWithTag("Turret");
+        foreach(GameObject turret in turrets)
+        {
+            Destroy(turret);
+        }
+        SaveGameManager.Instance.SaveableObjects.Clear();
         SaveGameOnClick();
-
-        
+        buildingManager.SetCost(SaveGameManager.Instance.SaveableObjects.Count);
+        AstarPath.active.Scan();
+        Debug.Log(SaveGameManager.Instance.SaveableObjects.Count);
+        textEvents.UpdateStats();
     }
 
                     

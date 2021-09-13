@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TurretBehavior : MonoBehaviour
 {
+    public BuildingManager buildingManager;
+    public Player player;
     public GameObject cannonFirePrefab;
     public float damage;
     EnemyBehavior enemy;
@@ -16,13 +18,15 @@ public class TurretBehavior : MonoBehaviour
     float shortestDistance = 999f;
     [SerializeField] private GameObject cannonTip;
     private GameObject target;
+    Bounds bounds;
     // Start is called before the first frame update
     void Start()
     {
+
         damage = stats.GetDamage();
         range = stats.GetRange();
         findClosestTool.SetRange(range);
-        Bounds bounds = gameObject.GetComponent<BoxCollider2D>().bounds;
+        bounds = gameObject.GetComponent<BoxCollider2D>().bounds;
         bounds.Expand(Vector3.forward * 1000);
         // Update the graph with each object's collider as it loads in
         AstarPath.active.UpdateGraphs(bounds);
@@ -86,6 +90,9 @@ public class TurretBehavior : MonoBehaviour
 
     public void DestroyThisProperly()
     {
+        //player.AddGold(buildingManager.GetCost());
         stats.DestroySaveable();
+        AstarPath.active.UpdateGraphs(bounds);
     }
+
 }

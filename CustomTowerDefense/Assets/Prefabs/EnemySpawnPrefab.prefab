@@ -46,9 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59ffa7388afae50438652738e04d158e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnTime: 1
+  path: {fileID: 0}
   enemySpawnCooldown: 0
   SpawnPoint: {fileID: 395971582634094318}
-  EnemyPrefab: {fileID: 2706542536188803488, guid: 388012d01be7a4a4aadf23d142d3eda9, type: 3}
+  EnemyPrefab: {fileID: 8861683751183172214, guid: e1544f77bc154a24e90d3915cb2daf35, type: 3}
 --- !u!114 &395971582011762117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +64,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  target: {fileID: 165729156705488683, guid: 259c6e34b6887944fa751cdf08f5e18b, type: 3}
+  target: {fileID: 4587527868795965117, guid: 29342f56ce3badb4d9ed2901feb77157, type: 3}
 --- !u!114 &395971582011762116
 MonoBehaviour:
   m_ObjectHideFlags: 0

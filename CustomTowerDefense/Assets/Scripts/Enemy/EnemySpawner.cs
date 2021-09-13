@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private float spawnTime = 2f;
+    [SerializeField] private float spawnTime = 1f;
     public AstarPath path;
     public float enemySpawnCooldown;
     public Transform SpawnPoint;

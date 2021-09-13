@@ -7,14 +7,14 @@ public class Player : MonoBehaviour
 {
     public float saveTimer = 0;
     public float statsUpdateCD = 0;
-    public int Gold;
+    public int Gold = 20;
     public int Level;
     public int XPToLevel;
     public int MaxXP = 10;
     public int Kills = 0;
-    
-    
-    
+
+
+    public BuildingManager buildingManager;
     public UI_TextEvents textEvents;
     [SerializeField] private BuildingTypeSO activeBuildingType;
 
@@ -110,12 +110,14 @@ public class Player : MonoBehaviour
     public void SavePlayer()
     {
         SaveSystem.SavePlayer(this);
+        SaveGameManager.Instance.Save();
     }
 
     public void LoadPlayer()
     {
         Debug.Log("loading player data");
         PlayerData data = SaveSystem.LoadPlayer();
+        
         if (data != null)
         {                    
             Level = data.Level;
@@ -159,7 +161,7 @@ public class Player : MonoBehaviour
     public void SetDefaultStats()
     {
         this.Level = 0;
-        this.Gold = 0;
+        this.Gold = 20;
         this.MaxXP = 10;
         this.XPToLevel = 0;
         this.Kills = 0;

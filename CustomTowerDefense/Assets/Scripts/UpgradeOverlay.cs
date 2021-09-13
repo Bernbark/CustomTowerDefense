@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class UpgradeOverlay : MonoBehaviour
 {
+    public BuildingManager buildingManager;
     private TurretBehavior tower;
-    public GameObject rangeBtn, damageBtn, closeBtn;
+    public GameObject rangeBtn, damageBtn, closeBtn, destroyBtn;
     private static UpgradeOverlay Instance { get; set; }
     private void Awake()
     {
@@ -18,6 +19,8 @@ public class UpgradeOverlay : MonoBehaviour
         damage.onClick.AddListener(UpgradeDamage);
         Button close = closeBtn.GetComponent<Button>();
         close.onClick.AddListener(Hide);
+        Button destroy = destroyBtn.GetComponent<Button>();
+        destroy.onClick.AddListener(DestroyThisObject);
 
         Hide();
     }
@@ -64,5 +67,11 @@ public class UpgradeOverlay : MonoBehaviour
     private void RefreshRangeVisual()
     {
         transform.Find("Range").localScale = Vector3.one * tower.GetRange();
+    }
+
+    private void DestroyThisObject()
+    {
+        Hide();
+        buildingManager.DestroyTurret(tower);
     }
 }

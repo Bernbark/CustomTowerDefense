@@ -24,8 +24,8 @@ public class BuildingManager : MonoBehaviour
     
     public Player player;
     public EnemyBehavior enemy;
+    public TurretBehavior tower;
     
-    private int buildCount;
     [SerializeField] private BuildingTypeSO defaultType; // Red square for now
     [SerializeField] private BuildingTypeSO activeBuildingType;
 
@@ -35,8 +35,7 @@ public class BuildingManager : MonoBehaviour
     {
         //Bounds bounds = prefab.GetComponent<BoxCollider2D>().bounds;
         //guo = new GraphUpdateObject(bounds);
-        buildCount = SaveGameManager.Instance.SaveableObjects.Count();
-        buildCost = (buildCount * 10) + 20;
+        
         player = GameObject.Find("Player").GetComponent<Player>();
         turrets = new List<GameObject>();
         snappingTool = gameObject.GetComponent<Snap>();
@@ -55,7 +54,7 @@ public class BuildingManager : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             changeColor.SetIsValidPosition(true);
-            if (Input.GetMouseButtonDown(0) && buildCount < MAX_TURRETS - 1 && !EventSystem.current.IsPointerOverGameObject())
+            if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
             {
                 if(player.GetGold() >= buildCost)
                 {
@@ -134,13 +133,24 @@ public class BuildingManager : MonoBehaviour
     {
         if (mostRecentBuilt != null)
         {
-            buildCount--;
-            player.AddGold(buildCost);
-            LowerBuildCost();
+            
+            
+            
+            //player.AddGold(buildCost);
+            
             TurretBehavior turret = mostRecentBuilt.GetComponent<TurretBehavior>();
+            
             turret.DestroyThisProperly();
+            player.AddGold(GetCost());
         }
         
+    }
+
+    public void DestroyTurret(TurretBehavior tower)
+    {
+        
+        tower.DestroyThisProperly();
+        player.AddGold(GetCost());
     }
 
     public void SetActiveBuildingType(BuildingTypeSO buildingTypeSO)
@@ -185,25 +195,31 @@ public class BuildingManager : MonoBehaviour
             GraphNode node1 = AstarPath.active.GetNearest(spawnPoint.position, NNConstraint.Default).node;
             GraphNode node2 = AstarPath.active.GetNearest(endPoint.position, NNConstraint.Default).node;
             player.SubtractGold(buildCost);
-            buildCount++;
-            RaiseBuildCost();
+            
+            
             if (!PathUtilities.IsPathPossible(node1, node2))
             {
                 Undo();
                 AstarPath.active.Scan(graphToScan);
                 Debug.Log("Path not possible, building not allowed here (object destroyed)");
             }
+            SetCost(SaveGameManager.Instance.SaveableObjects.Count());
             
         }
     }
 
-    public void RaiseBuildCost()
+    public void SetCost(int cost)
     {
-        buildCost = buildCost * buildCount - buildCount;
+        buildCost = cost * 100 + 10;
     }
 
-    public void LowerBuildCost()
+    public int GetCost()
     {
-        buildCost = buildCost / buildCount + buildCount;
+        
+        SetCost(SaveGameManager.Instance.SaveableObjects.Count());
+        
+        return buildCost;
     }
+
+    
 }

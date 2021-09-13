@@ -18,8 +18,9 @@ public class EnemyBehavior : MonoBehaviour
         player = GameObject.Find("Player").GetComponent<Player>();
         EnemyManager.Instance.enemies.Add(this);
         hp = 5 * player.GetLevel()+(player.GetKills()*Time.deltaTime);
-        value = 5 * player.GetLevel() + (player.GetKills() * Time.deltaTime);
+        value = 5 * player.GetLevel() + player.GetKills();
         maxHP = hp;
+        Debug.Log(hp);
     }
 
     // Update is called once per frame

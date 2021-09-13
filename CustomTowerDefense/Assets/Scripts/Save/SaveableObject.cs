@@ -42,4 +42,6 @@ public abstract class SaveableObject : MonoBehaviour
         SaveGameManager.Instance.SaveableObjects.Remove(this);
         Destroy(gameObject);
     }
+
+    
 }

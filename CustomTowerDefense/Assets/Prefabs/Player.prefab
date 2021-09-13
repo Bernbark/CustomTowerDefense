@@ -44,8 +44,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveTimer: 0
+  statsUpdateCD: 0
   Gold: 0
   Level: 0
   XPToLevel: 0
   MaxXP: 0
-  textEvents: {fileID: 0}
+  Kills: 0
+  buildingManager: {fileID: 7260298666520953439, guid: a539138b16d48a846bddd0e9c8b3cbad, type: 3}
+  textEvents: {fileID: 2891536152253249076, guid: e4fc4bf777057884c9b27256fe013df6, type: 3}
+  activeBuildingType: {fileID: 0}
