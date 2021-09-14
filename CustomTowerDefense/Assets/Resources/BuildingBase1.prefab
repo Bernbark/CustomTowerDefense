@@ -342,6 +342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29fedb495ec527a42accd4cebaa135f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  snappingTool: {fileID: 6520884936588836899}
   objectType: 0
   range: 1.5
   damage: 1

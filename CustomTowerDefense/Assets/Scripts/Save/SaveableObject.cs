@@ -10,6 +10,7 @@ enum ObjectType
 
 public abstract class SaveableObject : MonoBehaviour
 {
+    public Snap snappingTool;
     protected string save;
     [SerializeField]
     private ObjectType objectType;
@@ -28,6 +29,7 @@ public abstract class SaveableObject : MonoBehaviour
 
     public virtual void Load(string[] values)
     {
+        
         transform.localPosition = SaveGameManager.Instance.StringToVector(values[1]);
 
     }

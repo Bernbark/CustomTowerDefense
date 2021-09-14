@@ -60,10 +60,7 @@ public class BuildingManager : MonoBehaviour
                 {
                     BuildTurret();
                 }
-                else
-                {
-                    Debug.Log("Out of gold, build cost is " + buildCost);
-                }
+                
                 //AstarPath.active.UpdateGraphs(guo);
                
                 
@@ -201,7 +198,7 @@ public class BuildingManager : MonoBehaviour
             {
                 Undo();
                 AstarPath.active.Scan(graphToScan);
-                Debug.Log("Path not possible, building not allowed here (object destroyed)");
+                
             }
             SetCost(SaveGameManager.Instance.SaveableObjects.Count());
             

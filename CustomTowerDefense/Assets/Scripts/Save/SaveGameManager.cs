@@ -21,9 +21,12 @@ public class SaveGameManager : MonoBehaviour
         }
     }
 
+    Snap snappingTool;
+
     private void Awake()
     {
         SaveableObjects = new List<SaveableObject>();
+        snappingTool = GetComponent<Snap>();
     }
 
     public void Save()
@@ -61,7 +64,7 @@ public class SaveGameManager : MonoBehaviour
             {
                 case "SquareTurret":
                     tmp = Instantiate(Resources.Load("BuildingBase1") as GameObject);
-                    ;
+                    
                     break;
                 case "CircleTurret":
                     tmp = Instantiate(Resources.Load("Circle") as GameObject);
@@ -69,6 +72,7 @@ public class SaveGameManager : MonoBehaviour
             }
             if(tmp!= null)
             {
+                Debug.Log(SaveGameManager.Instance.StringToVector(value[1]));
                 
                 tmp.GetComponent<SaveableObject>().Load(value);
             }
@@ -91,7 +95,7 @@ public class SaveGameManager : MonoBehaviour
         //1,2,3
         string[] pos = value.Split(',');
 
-        return new Vector3(float.Parse(pos[0]),float.Parse(pos[1]),float.Parse(pos[2]));
+        return new Vector3(Mathf.RoundToInt(float.Parse(pos[0])/.25f)*.25f, Mathf.RoundToInt(float.Parse(pos[1]) / .25f) * .25f, Mathf.RoundToInt(float.Parse(pos[2]) / .25f) * .25f);
     }
 
     public Quaternion StringToQuaternion(string value)

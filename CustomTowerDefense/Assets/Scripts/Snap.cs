@@ -24,7 +24,7 @@ public class Snap : MonoBehaviour
         position = new Vector3(
             Mathf.RoundToInt(this.transform.position.x / this.gridSize.x) * this.gridSize.x,
             Mathf.RoundToInt(this.transform.position.y / this.gridSize.y) * this.gridSize.y,
-            Mathf.RoundToInt(this.transform.position.z / this.gridSize.z) * this.gridSize.z
+            0
             );
         //this.transform.position = position;
         return position;

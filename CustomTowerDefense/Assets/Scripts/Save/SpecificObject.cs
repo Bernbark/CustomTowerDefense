@@ -21,15 +21,14 @@ public class SpecificObject : SaveableObject
         range = tower.GetRange();
         damage = tower.GetDamage();
         save = range.ToString() + "_" + damage.ToString();
-        Debug.Log(save + "= savestats");
+        
         base.Save(id);
     }
 
     public override void Load(string[] values)
     {
         
-        Debug.Log(values[2]+"=values 2");
-        Debug.Log(values[3] + "=values 3");
+        
         range = float.Parse(values[2]);
         tower.SetRange(range);
         damage = float.Parse(values[3]);

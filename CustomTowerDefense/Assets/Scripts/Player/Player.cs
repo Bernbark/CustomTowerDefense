@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
         if(saveTimer >= 5f)
         {
             SavePlayer();
-            Debug.Log("saved");
+            
             saveTimer = 0;
         }
         if (statsUpdateCD>=.2f)
@@ -115,7 +115,7 @@ public class Player : MonoBehaviour
 
     public void LoadPlayer()
     {
-        Debug.Log("loading player data");
+        
         PlayerData data = SaveSystem.LoadPlayer();
         
         if (data != null)

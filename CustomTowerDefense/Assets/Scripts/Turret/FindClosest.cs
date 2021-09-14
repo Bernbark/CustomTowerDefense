@@ -25,11 +25,7 @@ public class FindClosest : MonoBehaviour
         FindClosestEnemy();
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, maxSearchDistance);
-    }
+    
 
     void FindClosestEnemy()
     {
@@ -53,7 +49,7 @@ public class FindClosest : MonoBehaviour
         
         if (closestEnemy != null)
         {
-            Debug.DrawLine(this.transform.position, closestEnemy.transform.position);
+            
             AimGun(closestEnemy);
             if (((closestEnemy.transform.position - this.transform.position).magnitude) > maxSearchDistance)
             {

@@ -41,24 +41,6 @@ public class ButtonHandlin : MonoBehaviour
         SaveGameManager.Instance.Save();
         SaveSystem.SavePlayer(player);
     }
-    
-    public void LoadGameOnClick(Button button)
-    {
-        /**
-        PlayerData data = SaveSystem.LoadPlayer();
-
-        player.SetLevel(data.Level);
-        player.SetGold(data.Gold);
-        player.SetMaxXP(data.MaxXP);
-        player.SetCurrentXP(data.XPToLevel);
-        */
-        SaveGameManager.Instance.Load();
-        SaveSystem.LoadPlayer();
-        //var graphToScan = AstarPath.active.data.gridGraph;
-        //AstarPath.active.Scan(graphToScan);
-        
-        
-    }
 
     public void WipePlayerData(Button button)
     {
