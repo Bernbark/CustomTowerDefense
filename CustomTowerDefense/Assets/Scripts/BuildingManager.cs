@@ -13,8 +13,11 @@ public class BuildingManager : MonoBehaviour
     private GameObject mostRecentBuilt;
     public GameObject cursor;
     ColorChange changeColor;
+    bool firstScan = false;
+    private float timer;
 
     private int buildCost;
+    private int turretType;
 
     //EnemySpawner spawn;
     private List<GameObject> turrets;
@@ -23,33 +26,45 @@ public class BuildingManager : MonoBehaviour
     //PlayerData data;
     
     public Player player;
-    public EnemyBehavior enemy;
-    public TurretBehavior tower;
+    //public EnemyBehavior enemy;
+    public TurretBehavior[] towers;
     
     [SerializeField] private BuildingTypeSO defaultType; // Red square for now
     [SerializeField] private BuildingTypeSO activeBuildingType;
 
-    //GraphUpdateObject guo;
+    public UI_TextEvents textEvents;
+
+    GraphUpdateObject guo;
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
-        //Bounds bounds = prefab.GetComponent<BoxCollider2D>().bounds;
-        //guo = new GraphUpdateObject(bounds);
-        
+        Bounds bounds = prefab.GetComponent<BoxCollider2D>().bounds;
+        guo = new GraphUpdateObject(bounds);
+        guo.updatePhysics = true;
+        AstarPath.active.Scan();
         player = GameObject.Find("Player").GetComponent<Player>();
         turrets = new List<GameObject>();
         snappingTool = gameObject.GetComponent<Snap>();
         //spawn = spawnPoint.gameObject.GetComponent<EnemySpawner>();
         changeColor = cursor.GetComponent<ColorChange>();
+        var graphToScan = AstarPath.active.data.gridGraph;
+        AstarPath.active.Scan(graphToScan);
+        GraphNode node1 = AstarPath.active.GetNearest(spawnPoint.position, NNConstraint.Default).node;
+        GraphNode node2 = AstarPath.active.GetNearest(endPoint.position, NNConstraint.Default).node;
+        PathUtilities.IsPathPossible(node1, node2);
         
-        
-        //guo.updatePhysics=true;
     }
 
     
 
     private void Update()
     {
+        timer += Time.deltaTime;
+        if (!firstScan && timer < .2f)
+        {
+            AstarPath.active.Scan();
+            firstScan = true;
+        }
         this.transform.position = GameUtils.GetMouseWorldPosition();
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -82,50 +97,6 @@ public class BuildingManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    /**
-    void Update()
-    {
-        this.transform.position = GameUtils.GetMouseWorldPosition();
-        if (EventSystem.current.IsPointerOverGameObject()){
-            changeColor.SetIsValidPosition(false);
-        }
-        else if (Input.GetMouseButtonDown(0) && buildCount < MAX_TURRETS-1 && !EventSystem.current.IsPointerOverGameObject())
-        {
-            changeColor.SetIsValidPosition(true);
-            Vector3 mouseWorldPosition = GameUtils.GetMouseWorldPosition();
-            Vector3 snappedPosition = snappingTool.SnapToGrid(mouseWorldPosition);
-            GraphNode node1 = AstarPath.active.GetNearest(spawnPoint.position, NNConstraint.Default).node;
-            GraphNode node2 = AstarPath.active.GetNearest(endPoint.position, NNConstraint.Default).node;
-            if (CanSpawnBuilding(activeBuildingType, snappedPosition) && isUnobstructed)
-            {
-                GameObject obj = Instantiate(activeBuildingType.prefab, snappedPosition, Quaternion.identity).gameObject;
-                turrets.Add(obj);
-                path.Scan();
-                if (!PathUtilities.IsPathPossible(node1, node2))
-                {
-                    Destroy(obj);
-                    Debug.Log("Path not possible, building not allowed here (object destroyed)");
-                }
-
-                path.Scan();
-            }
-            else
-            {
-                Debug.Log("Path not possible, building not allowed here");
-            }
-            //Debug.LogError(buildCount+ " is the index of last built");
-
-
-
-        }
-        if (Input.GetKeyDown(KeyCode.Delete))
-        {
-            Undo();
-        }
-    }
-    */
-
     private void Undo()
     {
         if (mostRecentBuilt != null)
@@ -148,6 +119,7 @@ public class BuildingManager : MonoBehaviour
         
         tower.DestroyThisProperly();
         player.AddGold(GetCost());
+        AstarPath.active.Scan();
     }
 
     public void SetActiveBuildingType(BuildingTypeSO buildingTypeSO)
@@ -186,6 +158,7 @@ public class BuildingManager : MonoBehaviour
         if (CanSpawnBuilding(activeBuildingType, snappedPosition))
         {
             mostRecentBuilt = Instantiate(activeBuildingType.prefab, snappedPosition, Quaternion.identity).gameObject;
+            //AstarPath.active.UpdateGraphs(mostRecentBuilt.GetComponent<BoxCollider2D>().bounds);
             turrets.Add(mostRecentBuilt);
             var graphToScan = AstarPath.active.data.gridGraph;
             AstarPath.active.Scan(graphToScan);
@@ -205,16 +178,27 @@ public class BuildingManager : MonoBehaviour
         }
     }
 
+    
+
     public void SetCost(int cost)
     {
-        buildCost = cost * 100 + 10;
+        if (activeBuildingType.name.Equals("ShotgunTurret"))
+        {
+            buildCost = 10 * cost * 100 + 10;
+        }
+        else
+        {
+            buildCost = cost * 100 + 10;
+        }
+        
+        //textEvents.UpdateStats();
     }
 
     public int GetCost()
     {
         
         SetCost(SaveGameManager.Instance.SaveableObjects.Count());
-        
+        //textEvents.UpdateStats();
         return buildCost;
     }
 

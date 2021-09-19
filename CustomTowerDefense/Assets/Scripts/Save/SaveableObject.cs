@@ -5,7 +5,7 @@ using UnityEngine;
 
 enum ObjectType
 {
-    SquareTurret, CircleTurret
+    SquareTurret, CircleTurret, ShotgunTurret
 }
 
 public abstract class SaveableObject : MonoBehaviour
@@ -27,11 +27,11 @@ public abstract class SaveableObject : MonoBehaviour
         PlayerPrefs.SetString(Application.loadedLevel+"-"+id.ToString(), objectType+"_"+transform.position.ToString()+"_"+save);
     }
 
-    public virtual void Load(string[] values)
+    public virtual void Load(List<string> values)
     {
         
         transform.localPosition = SaveGameManager.Instance.StringToVector(values[1]);
-
+        AstarPath.active.Scan();
     }
 
     /**

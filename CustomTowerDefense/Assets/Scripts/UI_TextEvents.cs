@@ -15,6 +15,7 @@ public class UI_TextEvents : MonoBehaviour
     public event EventHandler OnGoldEarned;
     public Player player;
     public BuildingManager build;
+    float timer = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -23,7 +24,20 @@ public class UI_TextEvents : MonoBehaviour
         levelText = GameObject.Find("LevelText").GetComponent<TextMeshProUGUI>();
     }
 
-    
+    private void Update()
+    {
+        if(timer > .1f)
+        {
+            UpdateStats();
+            timer = 0;
+        }
+        else
+        {
+            timer += Time.deltaTime;
+        }
+        
+    }
+
     public void UpdateStats()
     {
         goldText.text = "Gold: " + player.GetGold().ToString();

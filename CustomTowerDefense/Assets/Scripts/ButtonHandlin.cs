@@ -45,17 +45,25 @@ public class ButtonHandlin : MonoBehaviour
     public void WipePlayerData(Button button)
     {
         player.SetDefaultStats();
-        GameObject[] turrets = GameObject.FindGameObjectsWithTag("Turret");
+        List<GameObject> turrets = new List<GameObject>(GameObject.FindGameObjectsWithTag("Shotgun"));
+        GameObject[] others = GameObject.FindGameObjectsWithTag("MachineGun");
+        foreach(GameObject obj in others)
+        {
+            turrets.Add(obj);
+        }
+        
         foreach(GameObject turret in turrets)
         {
             Destroy(turret);
+            
         }
+        turrets.Clear();
         SaveGameManager.Instance.SaveableObjects.Clear();
         SaveGameOnClick();
         buildingManager.SetCost(SaveGameManager.Instance.SaveableObjects.Count);
         AstarPath.active.Scan();
         Debug.Log(SaveGameManager.Instance.SaveableObjects.Count);
-        textEvents.UpdateStats();
+        
     }
 
                     

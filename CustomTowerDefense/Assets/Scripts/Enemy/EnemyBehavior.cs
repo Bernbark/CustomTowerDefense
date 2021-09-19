@@ -3,44 +3,38 @@ using System.Collections.Generic;
 using Pathfinding;
 using UnityEngine;
 
-public class EnemyBehavior : MonoBehaviour
+public abstract class EnemyBehavior : MonoBehaviour
 {
-    Player player;
-    private float hp;
-    private float maxHP;
-    private float value;
+    
+    private GameObject playerObj;
+    protected Player player;
+    public float hp;
+    public float maxHP;
+    public float value;
     public HealthBar healthBar;
+    public int playerLevel, playerKills;
     
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
-        
-        player = GameObject.Find("Player").GetComponent<Player>();
-        EnemyManager.Instance.enemies.Add(this);
-        hp = 5 * player.GetLevel()+(player.GetKills()*Time.deltaTime);
-        value = 5 * player.GetLevel() + player.GetKills();
+        player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        playerLevel = GetPlayerLevel();
+        playerKills = GetPlayerKills();
+        hp = 5;
         maxHP = hp;
-        Debug.Log(hp);
+        value = hp;
+        
+        EnemyManager.Instance.enemies.Add(this);
+  
+        
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if(hp <= 0)
-        {
-            hp = 0;
-            player.AddGold((int)value);
-            player.AddXP(1);
-            player.AddToKillCount();
-            Destroy(this.gameObject);
-
-        }
-    }
-
-    
     
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    
+
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         
         if (collision.transform.tag == "EndPoint")
@@ -48,7 +42,7 @@ public class EnemyBehavior : MonoBehaviour
             
             Destroy(this.gameObject);
             
-            player.SubtractGold((int)value);
+            player.SubtractGoldFromLeak((int)value);
             EnemyManager.Instance.enemies.Remove(this);
         }
     }
@@ -58,5 +52,15 @@ public class EnemyBehavior : MonoBehaviour
         hp -= damage;
         
         healthBar.SetHealth(hp, maxHP);
+    }
+
+    private int GetPlayerLevel()
+    {
+        return player.GetLevel();
+    }
+
+    private int GetPlayerKills()
+    {
+        return player.GetKills();
     }
 }

@@ -17,13 +17,17 @@ public class Player : MonoBehaviour
     public BuildingManager buildingManager;
     public UI_TextEvents textEvents;
     [SerializeField] private BuildingTypeSO activeBuildingType;
+    private void Awake()
+    {
+        SaveGameManager.Instance.Load();
+        LoadPlayer();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
 
-        SaveGameManager.Instance.Load();
-        LoadPlayer();
+        
         
     }
 
@@ -39,11 +43,7 @@ public class Player : MonoBehaviour
             
             saveTimer = 0;
         }
-        if (statsUpdateCD>=.2f)
-        {
-            
-            statsUpdateCD = 0;
-        }
+        
     }
 
     void ChangeText()
@@ -62,7 +62,17 @@ public class Player : MonoBehaviour
         {
             this.Gold = 0;
         }
-        textEvents.UpdateStats();
+        
+    }
+
+    // Prevent player from permanently being unable to build due to leaks.
+    public void SubtractGoldFromLeak(int gold)
+    {
+        
+        if (this.Gold  >= gold+(Kills * 10))
+        {
+            this.Gold -= gold;
+        }
     }
 
     public void LevelUp()
@@ -84,7 +94,6 @@ public class Player : MonoBehaviour
     public void AddGold(int gold)
     {
         this.Gold += gold;
-        textEvents.UpdateStats();
     }
 
     public int GetGold()
@@ -130,7 +139,7 @@ public class Player : MonoBehaviour
         {
             SetDefaultStats();
         }
-        textEvents.UpdateStats();
+        
     }
 
     public void SetLevel(int level)
@@ -171,5 +180,19 @@ public class Player : MonoBehaviour
     public void AddToKillCount()
     {
         this.Kills++;
+    }
+
+    public void WipeData()
+    {
+        SetDefaultStats();
+        GameObject[] turrets = GameObject.FindGameObjectsWithTag("Turret");
+        foreach (GameObject turret in turrets)
+        {
+            Destroy(turret);
+        }
+        SaveGameManager.Instance.SaveableObjects.Clear();
+        
+        buildingManager.SetCost(SaveGameManager.Instance.SaveableObjects.Count);
+        AstarPath.active.Scan();
     }
 }

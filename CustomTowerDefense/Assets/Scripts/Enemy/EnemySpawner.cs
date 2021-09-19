@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private float spawnTime = 1f;
-    public AstarPath path;
+    
     public float enemySpawnCooldown;
     public Transform SpawnPoint;
     public GameObject EnemyPrefab;
@@ -13,8 +13,8 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-        
+        AstarPath.active.Scan();
+
         enemySpawnCooldown = 0;
     }
 
@@ -32,8 +32,5 @@ public class EnemySpawner : MonoBehaviour
 
     
 
-    public AstarPath GetPath()
-    {
-        return this.path;
-    }
+    
 }

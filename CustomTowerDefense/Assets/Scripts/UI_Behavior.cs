@@ -5,7 +5,11 @@ using UnityEngine.UI;
 
 public class UI_Behavior : MonoBehaviour
 {
-    private bool hidden = false;
+    private bool hidden = true;
+    private void Start()
+    {
+        Hide();
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -13,11 +17,13 @@ public class UI_Behavior : MonoBehaviour
             if (hidden)
             {
                 Show();
+                Time.timeScale = 0;
                 hidden = false;
             }
             else
             {
                 Hide();
+                Time.timeScale = 1;
                 hidden = true;
             }
         }

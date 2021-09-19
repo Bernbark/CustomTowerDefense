@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d04686522d1ed418c9b8aad7ed4c2c, type: 3}
   m_Name: Turret1
   m_EditorClassIdentifier: 
-  prefab: {fileID: 859176371775080909, guid: 427ece1254e53e04c851976d5bb3df41, type: 3}
+  prefab: {fileID: 1759592712714948361, guid: 122f697b143ec3248a31345e27658c5a, type: 3}
   sprite: {fileID: 21300000, guid: 1222491ba17548347b8a4a308617a213, type: 3}
   name: Red Square

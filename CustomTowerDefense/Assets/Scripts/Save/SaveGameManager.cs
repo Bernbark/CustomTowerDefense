@@ -27,6 +27,7 @@ public class SaveGameManager : MonoBehaviour
     {
         SaveableObjects = new List<SaveableObject>();
         snappingTool = GetComponent<Snap>();
+        
     }
 
     public void Save()
@@ -57,7 +58,7 @@ public class SaveGameManager : MonoBehaviour
         {
             GameObject tmp = null;
             //index 0 is objectType, index 1 is the position, 2 is range, 3 is damage
-            string[] value = PlayerPrefs.GetString(Application.loadedLevel+"-"+ i.ToString()).Split('_');
+            List<string> value = new List<string>(PlayerPrefs.GetString(Application.loadedLevel+"-"+ i.ToString()).Split('_'));
 
 
             switch (value[0])
@@ -65,24 +66,30 @@ public class SaveGameManager : MonoBehaviour
                 case "SquareTurret":
                     tmp = Instantiate(Resources.Load("BuildingBase1") as GameObject);
                     
+
                     break;
                 case "CircleTurret":
                     tmp = Instantiate(Resources.Load("Circle") as GameObject);
                     break;
+
+                case "ShotgunTurret":
+                    tmp = Instantiate(Resources.Load("ShotgunTurret") as GameObject);
+                    
+
+                    break;
             }
             if(tmp!= null)
             {
-                Debug.Log(SaveGameManager.Instance.StringToVector(value[1]));
                 
                 tmp.GetComponent<SaveableObject>().Load(value);
+                
             }
-            
+
             
         }
-        
-        //var graphToScan = AstarPath.active.data.gridGraph;
-        //AstarPath.active.Scan(graphToScan);
-        //AstarPath.active.Scan();
+
+
+        AstarPath.active.Scan();
     }
     
 

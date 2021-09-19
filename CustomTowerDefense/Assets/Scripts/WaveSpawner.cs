@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using CodeMonkey.Utils;
 public class WaveSpawner : MonoBehaviour
 {
 
     [SerializeField] private Transform timerHolder;
+    [SerializeField] private Button button;
     bool timerExists = false;
 
+    private string tooltip;
     public GameObject spawnWave;
     
     public enum SpawnState { SPAWNING, WAITING, COUNTING, START };
@@ -16,7 +18,7 @@ public class WaveSpawner : MonoBehaviour
     public  class Wave
     {
         public string name;
-        public Transform enemy;
+        public Transform[] enemies;
         public int count;
         public float rate;
     }
@@ -33,8 +35,11 @@ public class WaveSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        tooltip = "Spawn Wave";
         Button spawnWaveButton = spawnWave.GetComponent<Button>();
         spawnWaveButton.onClick.AddListener(SpawnWaveOnClick);
+        button.GetComponent<Button_UI>().MouseOverOnceFunc = () => Tooltip.ShowTooltip_Static(tooltip);
+        button.GetComponent<Button_UI>().MouseOutOnceFunc = () => Tooltip.HideTooltip_Static();
         waveCountdown = timeBetweenWaves;
     }
 
@@ -94,6 +99,7 @@ public class WaveSpawner : MonoBehaviour
 
     IEnumerator TimerStart()
     {
+        yield return new WaitForSeconds(.01f);
         state = SpawnState.COUNTING;
         for (int i = 5; i > 0; i--)
         {
@@ -109,6 +115,13 @@ public class WaveSpawner : MonoBehaviour
     {
         if(state != SpawnState.COUNTING)
         StartCoroutine(SpawnWave(waves[nextWave]));
+        if (nextWave + 1 > waves.Length - 1)
+        {
+            nextWave = -1;
+
+        }
+        nextWave++;
+        tooltip = "Next Wave = Wave " + nextWave;
     }
 
     IEnumerator SpawnWave (Wave _wave)
@@ -119,7 +132,15 @@ public class WaveSpawner : MonoBehaviour
         // Spawn
         for (int i = 0; i < _wave.count; i++)
         {
-            SpawnEnemy(_wave.enemy);
+            if(i % 2 == 0)
+            {
+                SpawnEnemy(_wave.enemies[1]);
+            }
+            else
+            {
+                SpawnEnemy(_wave.enemies[0]);
+            }
+            
             yield return new WaitForSeconds(1f / _wave.rate);
         }
 
@@ -146,5 +167,6 @@ public class WaveSpawner : MonoBehaviour
             
         }
         nextWave++;
+        tooltip = "Next Wave = Wave " + nextWave;
     }
 }

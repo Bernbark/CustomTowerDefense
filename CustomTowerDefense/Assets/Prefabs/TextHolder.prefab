@@ -990,5 +990,5 @@ MonoBehaviour:
   maxXPText: {fileID: 2891536151820720906}
   currentXPText: {fileID: 2891536151556738791}
   buildCostText: {fileID: 2891536150940258541}
-  player: {fileID: 0}
-  build: {fileID: 0}
+  player: {fileID: 57814113056400474, guid: 7c3d1b38acf7ac34cba839ef0fe60c16, type: 3}
+  build: {fileID: 7260298666520953439, guid: a539138b16d48a846bddd0e9c8b3cbad, type: 3}
