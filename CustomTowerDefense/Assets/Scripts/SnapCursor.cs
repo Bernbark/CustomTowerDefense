@@ -7,7 +7,7 @@ public class SnapCursor : MonoBehaviour
     [SerializeField] private Vector3 gridSize = new Vector3(.25f,.25f,.25f);
     private void Update()
     {
-        this.transform.position = GameUtils.GetMouseWorldPosition();
+        this.transform.position = GameUtils.Instance.GetMouseWorldPositionForUtils();
         SnapToGrid();
     }
     private void OnDrawGizmos()

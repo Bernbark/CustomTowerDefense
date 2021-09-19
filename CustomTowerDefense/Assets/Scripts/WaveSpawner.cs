@@ -113,8 +113,17 @@ public class WaveSpawner : MonoBehaviour
 
     public void SpawnWaveOnClick()
     {
-        if(state != SpawnState.COUNTING)
-        StartCoroutine(SpawnWave(waves[nextWave]));
+        if(state != SpawnState.COUNTING && state != SpawnState.WAITING)
+        {
+            StartCoroutine(SpawnWave(waves[nextWave]));
+        }
+        
+        
+        
+    }
+
+    IEnumerator SpawnWave (Wave _wave)
+    {
         if (nextWave + 1 > waves.Length - 1)
         {
             nextWave = -1;
@@ -122,11 +131,6 @@ public class WaveSpawner : MonoBehaviour
         }
         nextWave++;
         tooltip = "Next Wave = Wave " + nextWave;
-    }
-
-    IEnumerator SpawnWave (Wave _wave)
-    {
-        
         state = SpawnState.SPAWNING;
 
         // Spawn
@@ -161,12 +165,6 @@ public class WaveSpawner : MonoBehaviour
         waveCountdown = timeBetweenWaves;
         // Start counting down to next wave, tell player wave is over
         
-        if (nextWave + 1 > waves.Length - 1)
-        {
-            nextWave = -1;
-            
-        }
-        nextWave++;
-        tooltip = "Next Wave = Wave " + nextWave;
+        
     }
 }

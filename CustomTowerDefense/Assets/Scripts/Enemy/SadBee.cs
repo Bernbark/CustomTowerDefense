@@ -5,8 +5,8 @@ public class SadBee : EnemyBehavior
     protected override void Start()
     {
         base.Start();
-        hp = (6 * playerLevel) + playerKills / 1000;
-        value = playerKills / 5;
+        hp = valueMod * (6 * playerLevel) + playerKills / 1000;
+        value = (playerKills / 5) * valueMod;
         maxHP = hp;
 
     }

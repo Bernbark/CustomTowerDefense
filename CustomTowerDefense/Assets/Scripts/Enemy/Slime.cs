@@ -5,8 +5,8 @@ public class Slime : EnemyBehavior
     protected override void Start()
     {
         base.Start();
-        hp = (30 * playerLevel) + playerKills / 1000;
-        value = 2 + playerLevel * playerKills;
+        hp = valueMod * (30 * playerLevel) + playerKills / 1000;
+        value = (2 + playerLevel) * playerKills * valueMod;
         maxHP = hp;
         Debug.Log("fish hp" + hp);
     }

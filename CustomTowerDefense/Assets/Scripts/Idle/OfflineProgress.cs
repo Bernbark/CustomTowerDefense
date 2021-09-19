@@ -12,7 +12,7 @@ public class OfflineProgress : MonoBehaviour
     public TextMeshProUGUI instructions;
     public Button close;
     public Player player;
-    int goldToEarn;
+    float goldToEarn;
     void Start()
     {
         Time.timeScale = 0;
@@ -21,8 +21,8 @@ public class OfflineProgress : MonoBehaviour
         {
             DateTime lastLogin = DateTime.Parse(PlayerPrefs.GetString("LAST_LOGIN"));
             TimeSpan span = DateTime.Now - lastLogin;
-            goldToEarn = (int)span.TotalMinutes * player.GetKills();
-            player.AddGold(goldToEarn);
+            goldToEarn = (float)span.TotalMinutes * player.GetKills() * KillsShopData.valueMod;
+            player.AddGold((int)goldToEarn);
             goldText.text = "Gold Earned Offline: " + goldToEarn;
             timeText.text = string.Format("You were gone for: {0} Days {1} Hours {2} Minutes {3} Seconds",span.Days,span.Hours,span.Minutes,span.Seconds);
         }

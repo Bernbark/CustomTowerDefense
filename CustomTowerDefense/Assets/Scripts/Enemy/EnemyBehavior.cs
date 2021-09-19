@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class EnemyBehavior : MonoBehaviour
 {
-    
+    protected float valueMod;
     private GameObject playerObj;
     protected Player player;
     public float hp;
@@ -23,7 +23,7 @@ public abstract class EnemyBehavior : MonoBehaviour
         hp = 5;
         maxHP = hp;
         value = hp;
-        
+        valueMod = KillsShopData.valueMod;
         EnemyManager.Instance.enemies.Add(this);
   
         

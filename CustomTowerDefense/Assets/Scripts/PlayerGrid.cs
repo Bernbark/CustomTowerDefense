@@ -15,7 +15,7 @@ public class PlayerGrid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cursor.position = GameUtils.GetMouseWorldPosition();
+        cursor.position = GameUtils.Instance.GetMouseWorldPositionForUtils();
         
         if (Input.GetMouseButtonDown(0))
         {

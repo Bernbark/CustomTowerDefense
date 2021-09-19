@@ -5,8 +5,8 @@ public class FishLips : EnemyBehavior
     protected override void Start()
     {
         base.Start();
-        hp = (40 * playerLevel) + playerKills / 1000;
-        value = 3 * playerKills;
+        hp = valueMod * (40 * playerLevel) + playerKills / 1000;
+        value = (3 * playerKills) * valueMod;
         maxHP = hp;
         Debug.Log("fish hp" + hp);
     }

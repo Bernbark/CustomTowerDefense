@@ -5,8 +5,8 @@ public class HappyBee : EnemyBehavior
     protected override void Start()
     {
         base.Start();
-        hp = (5 * playerLevel) + playerKills / 1000;
-        value = playerKills/6;
+        hp = valueMod * (5 * playerLevel) + playerKills / 1000;
+        value = (playerKills/6 ) *valueMod;
         maxHP = hp;
         
     }

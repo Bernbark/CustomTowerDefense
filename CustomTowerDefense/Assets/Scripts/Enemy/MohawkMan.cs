@@ -7,8 +7,8 @@ public class MohawkMan : EnemyBehavior
     protected override void Start()
     {
         base.Start();
-        hp = (20 * playerLevel) + playerKills / 1000;
-        value = 2 * playerKills;
+        hp = valueMod * (20 * playerLevel) + playerKills / 1000;
+        value = (2 * playerKills) * valueMod;
         maxHP = hp;
         Debug.Log("fish hp" + hp);
     }

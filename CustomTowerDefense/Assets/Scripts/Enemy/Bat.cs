@@ -13,8 +13,8 @@ public class Bat : EnemyBehavior
         
         base.Start();
 
-        hp = (3 * 1+playerLevel) + playerKills/1000;
-        value = 5 + playerKills;
+        hp = ((3 * 1+playerLevel) + playerKills/1000)*valueMod;
+        value = (5 + playerKills)*valueMod;
         maxHP = hp;
         Debug.Log("bat hp"+hp);
     }

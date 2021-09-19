@@ -5,8 +5,8 @@ public class AngryBee : EnemyBehavior
     protected override void Start()
     {
         base.Start();
-        hp = (7 * playerLevel) + playerKills / 1000;
-        value = playerKills / 4;
+        hp = valueMod * (7 * playerLevel) + playerKills / 1000;
+        value = (playerKills / 4 ) *valueMod;
         maxHP = hp;
 
     }

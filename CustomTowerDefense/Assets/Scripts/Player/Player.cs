@@ -75,6 +75,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void SubtractKills(float amount)
+    {
+        Kills -= (int)amount;
+    }
+
     public void LevelUp()
     {
         XPToLevel -= MaxXP;

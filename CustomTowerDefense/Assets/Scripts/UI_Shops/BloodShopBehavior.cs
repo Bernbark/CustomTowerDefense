@@ -5,6 +5,15 @@ using UnityEngine.UI;
 
 public class BloodShopBehavior : MonoBehaviour
 {
+    // Unlock new tower types
+
+    // Make enemies worth more kills
+
+    // Make enemies worth more gold
+
+    // Special abilities, speed up towers, slow down enemies, damage the whole screen
+
+   
     private bool opened;
     float position;
     public Button openShop;

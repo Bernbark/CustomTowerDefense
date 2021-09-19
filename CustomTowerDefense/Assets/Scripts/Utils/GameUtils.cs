@@ -2,13 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameUtils {
+public class GameUtils : MonoBehaviour{
 
+    public static GameUtils Instance { get; set; }
+    private Camera camera;
     public const int sortingOrderDefault = 5000;
     public static TextMesh CreateWorldText(string text, Vector3 localPosition,Transform parent = null, int fontSize = 10, Color? color = null, TextAnchor textAnchor = TextAnchor.UpperLeft, TextAlignment textAlignment = TextAlignment.Left, int sortingOrder = sortingOrderDefault)
     {
         if (color == null) color = Color.white;
         return CreateWorldText(parent, text, localPosition, fontSize, (Color)color, textAnchor, textAlignment, sortingOrder);
+    }
+
+    private void Awake()
+    {
+        Instance = this;
     }
 
     // Create Text in the World
@@ -30,13 +37,30 @@ public class GameUtils {
         return textMesh;
     }
 
-    
+    public Camera GetCamera()
+    {
+        camera = (Camera)FindObjectOfType(typeof(Camera));
+        if (camera)
+        {
+            return camera;
+        }
+        else
+        {
+            camera = Camera.main;
+        }
+        return camera;
+    }
+
+    public Vector3 GetMouseWorldPositionForUtils()
+    {
+        Vector3 vec = GetMouseWorldPositionWithZ(Input.mousePosition, GetCamera());
+        vec.z = 0f;
+        return vec;
+    }
 
     public static Vector3 GetMouseWorldPosition()
     {
-        Vector3 vec = GetMouseWorldPositionWithZ(Input.mousePosition, Camera.main);
-        vec.z = 0f;
-        return vec;
+        return Instance.GetMouseWorldPositionForUtils();
     }
     public static Vector3 GetMouseWorldPositionWithZ()
     {

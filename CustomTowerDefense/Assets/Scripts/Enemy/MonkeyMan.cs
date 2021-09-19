@@ -5,8 +5,8 @@ public class MonkeyMan : EnemyBehavior
     protected override void Start()
     {
         base.Start();
-        hp = (50 * playerLevel) + playerKills / 1000;
-        value = 4 * playerKills;
+        hp = valueMod * (50 * playerLevel) + playerKills / 1000;
+        value = 4 * playerKills * valueMod;
         maxHP = hp;
         Debug.Log("fish hp" + hp);
     }

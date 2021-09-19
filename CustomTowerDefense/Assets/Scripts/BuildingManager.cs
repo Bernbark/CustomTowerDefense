@@ -65,7 +65,7 @@ public class BuildingManager : MonoBehaviour
             AstarPath.active.Scan();
             firstScan = true;
         }
-        this.transform.position = GameUtils.GetMouseWorldPosition();
+        this.transform.position = GameUtils.Instance.GetMouseWorldPositionForUtils();
         if (Input.GetKey(KeyCode.LeftShift))
         {
             changeColor.SetIsValidPosition(true);
@@ -153,7 +153,7 @@ public class BuildingManager : MonoBehaviour
 
     private void BuildTurret()
     {
-        Vector3 mouseWorldPosition = GameUtils.GetMouseWorldPosition();
+        Vector3 mouseWorldPosition = GameUtils.Instance.GetMouseWorldPositionForUtils();
         Vector3 snappedPosition = snappingTool.SnapToGrid(mouseWorldPosition);
         if (CanSpawnBuilding(activeBuildingType, snappedPosition))
         {
