@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public int XPToLevel;
     public int MaxXP = 10;
     public int Kills = 0;
-
+    public int Blood = 0;
 
     public BuildingManager buildingManager;
     public UI_TextEvents textEvents;
@@ -139,6 +139,7 @@ public class Player : MonoBehaviour
             MaxXP = data.MaxXP;
             XPToLevel = data.XPToLevel;
             Kills = data.Kills;
+            Blood = data.Blood;
         }
         else
         {
@@ -172,6 +173,11 @@ public class Player : MonoBehaviour
         return this.Kills;
     }
 
+    public int GetBlood()
+    {
+        return this.Blood;
+    }
+
     public void SetDefaultStats()
     {
         this.Level = 0;
@@ -179,12 +185,22 @@ public class Player : MonoBehaviour
         this.MaxXP = 10;
         this.XPToLevel = 0;
         this.Kills = 0;
-        
+        this.Blood = 0;
     }
 
-    public void AddToKillCount()
+    public void AddBlood(int amount)
     {
-        this.Kills++;
+        this.Blood += amount;
+    }
+
+    public void SubtractBlood(int amount)
+    {
+        this.Blood -= amount;
+    }
+
+    public void AddToKillCount(int killAmount)
+    {
+        this.Kills += killAmount;
     }
 
     public void WipeData()

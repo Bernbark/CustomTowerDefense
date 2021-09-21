@@ -18,7 +18,7 @@ public class AngryBee : EnemyBehavior
             hp = 0;
             player.AddGold((int)value);
             player.AddXP(1);
-            player.AddToKillCount();
+            player.AddToKillCount(BloodShopData.killsMod);
             Destroy(this.gameObject);
 
         }

@@ -20,7 +20,7 @@ public class MohawkMan : EnemyBehavior
             hp = 0;
             player.AddGold((int)value);
             player.AddXP(3);
-            player.AddToKillCount();
+            player.AddToKillCount(BloodShopData.killsMod);
             Destroy(this.gameObject);
 
         }

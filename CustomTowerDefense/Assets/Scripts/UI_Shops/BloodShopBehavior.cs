@@ -13,23 +13,34 @@ public class BloodShopBehavior : MonoBehaviour
 
     // Special abilities, speed up towers, slow down enemies, damage the whole screen
 
-   
+    public Player player;
     private bool opened;
     float position;
-    public Button openShop;
+    public Button openShop, buyKillsPerDeathButton;
     private Vector3 startPosition;
     Vector3 newPos;
+    
     // Start is called before the first frame update
     void Start()
     {
         position = 0;
         opened = false;
         openShop.onClick.AddListener(OpenOverTime);
+        buyKillsPerDeathButton.onClick.AddListener(IncrementBlood);
         startPosition = this.transform.position;
     }
 
-    
 
+
+    private void IncrementBlood()
+    {
+        if (player.GetBlood() >= BloodShopData.killsModCost)
+        {
+            player.SubtractBlood((int)BloodShopData.killsModCost);
+            BloodShopData.IncrementValueMod();
+
+        }
+    }
 
     public void OpenOverTime()
     {

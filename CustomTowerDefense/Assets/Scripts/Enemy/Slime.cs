@@ -18,7 +18,7 @@ public class Slime : EnemyBehavior
             hp = 0;
             player.AddGold((int)value);
             player.AddXP(4);
-            player.AddToKillCount();
+            player.AddToKillCount(BloodShopData.killsMod);
             Destroy(this.gameObject);
 
         }

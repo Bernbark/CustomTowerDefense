@@ -10,6 +10,7 @@ public class PlayerData
     public int XPToLevel;
     public int MaxXP;
     public int Kills;
+    public int Blood;
 
     public PlayerData(Player player)
     {
@@ -18,5 +19,6 @@ public class PlayerData
         XPToLevel = player.XPToLevel;
         MaxXP = player.MaxXP;
         Kills = player.Kills;
+        Blood = player.Blood;
     }
 }

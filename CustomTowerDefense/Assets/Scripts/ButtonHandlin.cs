@@ -63,9 +63,9 @@ public class ButtonHandlin : MonoBehaviour
         buildingManager.SetCost(SaveGameManager.Instance.SaveableObjects.Count);
         AstarPath.active.Scan();
         Debug.Log(SaveGameManager.Instance.SaveableObjects.Count);
-        KillsShopData.valueMod = 1;
-        KillsShopData.valueCost = 100;
-        KillsShopData.UpdateText_Static();
+        KillsShopData.ResetData_Static();
+        BloodShopData.ResetData_Static();
+
     }
 
                     

@@ -22,11 +22,12 @@ public class KillsShopBehavior : MonoBehaviour
 
     private bool opened;
     float position;
-    public Button openShop, addValue;
+    public Button openShop, addValue, bloodPerSecButton;
     
     public Player player;
     private Vector3 startPosition;
     Vector3 newPos;
+    private float bloodTimer;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,11 +35,21 @@ public class KillsShopBehavior : MonoBehaviour
         opened = false;
         openShop.onClick.AddListener(OpenOverTime);
         addValue.onClick.AddListener(IncrementValue);
-        
+        bloodPerSecButton.onClick.AddListener(IncrementBloodPerSec);
         startPosition = this.transform.position;
     }
 
+    private void Update()
+    {
+        bloodTimer += Time.deltaTime;
+        if (bloodTimer >= 1)
+        {
+            player.AddBlood(KillsShopData.bloodPerSecond);
+            BloodShopData.UpdateText_Static();
+            bloodTimer = 0;
+        }
 
+    }
 
 
     public void OpenOverTime()
@@ -67,6 +78,16 @@ public class KillsShopBehavior : MonoBehaviour
             
         }
         
+        
+    }
+
+    private void IncrementBloodPerSec()
+    {
+        if(player.GetBlood() >= KillsShopData.bloodPerSecondCost)
+        {
+            player.SubtractBlood(KillsShopData.bloodPerSecondCost);
+            KillsShopData.IncrementBloodPerSec_Static();
+        }
         
     }
 }
