@@ -99,8 +99,9 @@ public class WaveSpawner : MonoBehaviour
 
     IEnumerator TimerStart()
     {
-        yield return new WaitForSeconds(.01f);
+        
         state = SpawnState.COUNTING;
+        yield return new WaitForSeconds(.01f);
         for (int i = 5; i > 0; i--)
         {
             string temp = (i).ToString();

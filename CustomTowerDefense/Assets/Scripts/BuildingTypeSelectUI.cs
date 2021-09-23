@@ -47,9 +47,10 @@ public class BuildingTypeSelectUI : MonoBehaviour
         {
             buildingBtnDictionary[buildingTypeSO].Find("selected").gameObject.SetActive(false);
         }
-
+        
         BuildingTypeSO activeBuildingType = buildingManager.GetActiveBuildingType();
         buildingBtnDictionary[activeBuildingType].Find("selected").gameObject.SetActive(true);
+        
     }
 
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,13 +35,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int curGold = this.Gold;
+        
         
         saveTimer += Time.deltaTime;
         if(saveTimer >= 5f)
         {
             SavePlayer();
-            
+            PlayerPrefs.SetString("LAST_LOGIN", DateTime.Now.ToString());
             saveTimer = 0;
         }
         

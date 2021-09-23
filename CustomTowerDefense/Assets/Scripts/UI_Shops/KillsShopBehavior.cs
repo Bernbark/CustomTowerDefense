@@ -83,9 +83,9 @@ public class KillsShopBehavior : MonoBehaviour
 
     private void IncrementBloodPerSec()
     {
-        if(player.GetBlood() >= KillsShopData.bloodPerSecondCost)
+        if(player.GetKills() >= KillsShopData.bloodPerSecondCost)
         {
-            player.SubtractBlood(KillsShopData.bloodPerSecondCost);
+            player.SubtractKills(KillsShopData.bloodPerSecondCost);
             KillsShopData.IncrementBloodPerSec_Static();
         }
         

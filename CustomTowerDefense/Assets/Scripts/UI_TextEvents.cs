@@ -26,7 +26,7 @@ public class UI_TextEvents : MonoBehaviour
 
     private void Update()
     {
-        if(timer > .1f)
+        if(timer > .1f || Time.timeScale == 0)
         {
             UpdateStats();
             timer = 0;

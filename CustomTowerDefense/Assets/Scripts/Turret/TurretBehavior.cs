@@ -17,7 +17,7 @@ public class TurretBehavior : MonoBehaviour
     private float bulletSpeed;
 
     EnemyBehavior enemy;
-    
+    //private int buyAmount;
     public float shootTiming = .5f;
     public float shootCooldown = 0f;
     Animator anim;
@@ -100,26 +100,26 @@ public class TurretBehavior : MonoBehaviour
         Tooltip.HideTooltip_Static();
     }
 
-    public void UpgradeRange()
+    public void UpgradeRange(int buyAmount)
     {
         
-        if (player.GetGold() >= rangeLevel * 20 + 10)
+        if (player.GetGold() >= (rangeLevel * 20 + 10)*buyAmount)
         {
-            range += .5f;
-            findClosestTool.AddRange(.5f);
-            player.SubtractGold(rangeLevel * 20 + 10);
-            rangeLevel++;
+            range += .5f * buyAmount;
+            findClosestTool.AddRange(.5f * buyAmount);
+            player.SubtractGold((rangeLevel * 20 + 10)*buyAmount);
+            rangeLevel+=buyAmount;
         }
         
     }
 
-    public void UpgradeDamage()
+    public void UpgradeDamage(int buyAmount)
     {
-        if(player.GetGold() >= damageLevel * 20 + 10)
+        if(player.GetGold() >= (damageLevel * 20 + 10)*buyAmount)
         {
-            this.damage += 1;
-            player.SubtractGold(damageLevel * 20 + 10);
-            damageLevel++;
+            this.damage += 1 * buyAmount;
+            player.SubtractGold((damageLevel * 20 + 10)*buyAmount);
+            damageLevel+=buyAmount;
         }
         
     }
