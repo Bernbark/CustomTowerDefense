@@ -4,9 +4,8 @@ public class Laser : MonoBehaviour
 {
     private LineRenderer lineRenderer;
     public LineCollision lc;
-    public Transform FirePoint;
-    public Transform LaserHit;
-    public Transform gun;
+    private Transform enemyTransform;
+   
     public TurretBehavior tower;
 
 
@@ -30,28 +29,20 @@ public class Laser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //lineRenderer.BakeMesh(mesh, true);
-        //meshCollider.sharedMesh = mesh;
-        //RaycastHit2D hit = Physics2D.Raycast(transform.position, FirePoint.position);
-        //Debug.DrawLine(LaserHit.position, hit.point);
-        //LaserHit.position = hit.point;
-
-        lineRenderer.SetPosition(0, gun.transform.position);
-        lineRenderer.SetPosition(1, FirePoint.position);
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (enemyTransform != null)
         {
+            lineRenderer.SetPosition(0, tower.transform.position);
+            lineRenderer.SetPosition(1, enemyTransform.position);
             lc.EnableCollision();
             lineRenderer.enabled = true;
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            lc.DisableCollision();
-            lineRenderer.enabled = false;
-        }
-
+        
     }
 
-
+    public void SetEnemy(EnemyBehavior enemy)
+    {
+        this.enemyTransform = enemy.transform;
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {

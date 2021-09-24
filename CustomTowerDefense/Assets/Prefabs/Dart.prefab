@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc4af58a112f3f4e8f3416f78563686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnOrigin: {fileID: 0}
+  spawnOrigin: {fileID: 6626455277563974250, guid: 6c12c0c3b417b2f4590c686200a807ee, type: 3}
 --- !u!50 &1237301233406065804
 Rigidbody2D:
   serializedVersion: 4

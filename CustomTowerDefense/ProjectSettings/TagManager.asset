@@ -7,6 +7,9 @@ TagManager:
   - EndPoint
   - Enemy
   - Turret
+  - MachineGun
+  - Shotgun
+  - LaserTurret
   layers:
   - Default
   - TransparentFX

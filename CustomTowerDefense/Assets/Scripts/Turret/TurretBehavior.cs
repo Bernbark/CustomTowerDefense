@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class TurretBehavior : MonoBehaviour
 {
+    public GameObject laserPrefab;
+    private Laser laser;
+
     public GameObject dartPrefab;
     public BuildingManager buildingManager;
     private Player player;
@@ -50,6 +53,12 @@ public class TurretBehavior : MonoBehaviour
             if (findClosestTool.IsTargetAvailable())
             {
                 enemy = findClosestTool.GetClosestEnemy();
+                if(this.tag == "LaserTurret")
+                {
+                    laser = laserPrefab.GetComponent<Laser>();
+                    laser.SetEnemy(enemy);
+  
+                }
                 if (this.tag == "Shotgun")
                 {
                     

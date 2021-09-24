@@ -46,12 +46,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endPoint: {fileID: 4587527868795965117, guid: 29342f56ce3badb4d9ed2901feb77157, type: 3}
   spawnPoint: {fileID: 395971582634094318, guid: 691f301440b351c44aaf154c390cb7ef, type: 3}
-  prefab: {fileID: 7397436410489292064, guid: 427ece1254e53e04c851976d5bb3df41, type: 3}
+  prefab: {fileID: 8444184828196996068, guid: 122f697b143ec3248a31345e27658c5a, type: 3}
   cursor: {fileID: 4069645257458879729, guid: acc6af435d7b6cf4795cac6ba0494afd, type: 3}
   player: {fileID: 57814113056400474, guid: 7c3d1b38acf7ac34cba839ef0fe60c16, type: 3}
-  enemy: {fileID: 8861683751183172207, guid: e1544f77bc154a24e90d3915cb2daf35, type: 3}
+  towers: []
   defaultType: {fileID: 11400000, guid: 25e229a5a687b4348960dbf70ca487be, type: 2}
   activeBuildingType: {fileID: 11400000, guid: 25e229a5a687b4348960dbf70ca487be, type: 2}
+  textEvents: {fileID: 0}
 --- !u!114 &7260298666520953437
 MonoBehaviour:
   m_ObjectHideFlags: 0

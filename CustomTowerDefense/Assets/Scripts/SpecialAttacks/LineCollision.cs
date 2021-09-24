@@ -1,17 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Laser), typeof(PolygonCollider2D))]
+[RequireComponent(typeof(Laser), typeof(PolygonCollider2D), typeof(LineRenderer))]
 public class LineCollision : MonoBehaviour
 {
     Laser lz;
-    public Transform gun;
+    //public Transform tower;
     PolygonCollider2D polygonCollider;
     List<Vector2> colliderPoints = new List<Vector2>();
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
         lz = GetComponent<Laser>();
         polygonCollider = GetComponent<PolygonCollider2D>();
     }
