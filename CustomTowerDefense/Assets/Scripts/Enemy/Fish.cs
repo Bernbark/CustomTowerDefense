@@ -1,7 +1,4 @@
 
-
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Fish : EnemyBehavior
@@ -13,8 +10,7 @@ public class Fish : EnemyBehavior
         value = (7 + playerKills) * valueMod;
         maxHP = hp;
         Debug.Log("fish hp" + hp);
-    }
-    
+    }   
     void Update()
     {
         if (hp <= 0)

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using CodeMonkey.Utils;
@@ -8,7 +7,7 @@ public class WaveSpawner : MonoBehaviour
 
     [SerializeField] private Transform timerHolder;
     [SerializeField] private Button button;
-    bool timerExists = false;
+    
 
     private string tooltip;
     public GameObject spawnWave;

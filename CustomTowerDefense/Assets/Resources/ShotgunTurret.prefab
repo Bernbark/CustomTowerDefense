@@ -316,7 +316,7 @@ MonoBehaviour:
   rangeLevel: 0
   specialLevel: 0
   shootTiming: 1
-  shootCooldown: 1
+  shootCooldown: 0
   stats: {fileID: 6121890870019644366}
   findClosestTool: {fileID: 2636045387070090230}
   cannonTip: {fileID: 5543573117069072239}

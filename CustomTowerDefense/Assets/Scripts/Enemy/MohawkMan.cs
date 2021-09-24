@@ -1,7 +1,4 @@
 using UnityEngine;
-
-
-
 public class MohawkMan : EnemyBehavior
 {
     protected override void Start()

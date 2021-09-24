@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
+
 
 public class KillsShopBehavior : MonoBehaviour
 {
@@ -48,13 +47,11 @@ public class KillsShopBehavior : MonoBehaviour
             BloodShopData.UpdateText_Static();
             bloodTimer = 0;
         }
-
     }
 
 
     public void OpenOverTime()
     {
-
         newPos = new Vector3(startPosition.x, startPosition.y + 8f);
         if (!opened)
         {
@@ -66,7 +63,6 @@ public class KillsShopBehavior : MonoBehaviour
             transform.position = Vector3.Lerp(this.transform.position, startPosition, 1f);
             opened = false;
         }
-
     }
 
     private void IncrementValue()
@@ -74,11 +70,8 @@ public class KillsShopBehavior : MonoBehaviour
         if(player.GetKills() >= KillsShopData.valueCost)
         {
             player.SubtractKills(KillsShopData.valueCost);
-            KillsShopData.IncrementValueMod();
-            
-        }
-        
-        
+            KillsShopData.IncrementValueMod();            
+        } 
     }
 
     private void IncrementBloodPerSec()

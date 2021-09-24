@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Pathfinding;
+
 using UnityEngine;
 
 public class TurretBehavior : MonoBehaviour
@@ -20,27 +18,16 @@ public class TurretBehavior : MonoBehaviour
     //private int buyAmount;
     public float shootTiming = .5f;
     public float shootCooldown = 0f;
-    Animator anim;
+    
     public SpecificObject stats;
     public FindClosest findClosestTool;
-    float shortestDistance = 999f;
+    
     [SerializeField] private GameObject cannonTip;
-    private GameObject target;
+    
     Bounds bounds;
-    private void Awake()
-    {
-        
-    }
-    // Start is called before the first frame update
+    
     void Start()
     {
-        //AstarPath.active.UpdateGraphs(gameObject.GetComponent<BoxCollider2D>().bounds);
-        /**bounds = GetComponent<BoxCollider2D>().bounds;
-        bounds.Expand(Vector3.up * 1000);
-        var guo = new GraphUpdateObject(bounds);
-        guo.updatePhysics = true;
-        AstarPath.active.UpdateGraphs(guo);
-        */
         AstarPath.active.Scan();
         shootCooldown = Random.Range(0f, .5f);
         player = FindObjectOfType<Player>();

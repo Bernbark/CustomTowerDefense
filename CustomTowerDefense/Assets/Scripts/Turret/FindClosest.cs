@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class FindClosest : MonoBehaviour
@@ -8,17 +7,11 @@ public class FindClosest : MonoBehaviour
     float distanceToEnemy;
     public TurretBehavior tower;
     [SerializeField] private float maxSearchDistance;
-    float degreesPerSec = 360f;
+    
     EnemyBehavior closestEnemy = null;
     private bool targetFound = false;
     public Transform gun;
-    // Update is called once per frame
-    private void Start()
-    {
-       
-        
-        
-    }
+    
     void Update()
     {
         

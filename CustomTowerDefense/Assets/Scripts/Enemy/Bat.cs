@@ -1,16 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class Bat : EnemyBehavior
 {
-    
-    
 
     protected override void Start()
-    {
-        
-        
+    {  
         base.Start();
 
         hp = ((3 * 1+playerLevel) + playerKills/1000)*valueMod;

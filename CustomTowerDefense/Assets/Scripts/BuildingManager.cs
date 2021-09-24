@@ -1,4 +1,4 @@
-using System.Collections;
+
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -17,12 +17,12 @@ public class BuildingManager : MonoBehaviour
     private float timer;
 
     private int buildCost;
-    private int turretType;
+    
 
     //EnemySpawner spawn;
     private List<GameObject> turrets;
     Snap snappingTool;
-    private const int MAX_TURRETS = 100;
+    
     //PlayerData data;
     
     public Player player;
@@ -74,13 +74,7 @@ public class BuildingManager : MonoBehaviour
                 if(player.GetGold() >= buildCost)
                 {
                     BuildTurret();
-                }
-                
-                //AstarPath.active.UpdateGraphs(guo);
-               
-                
-                //var graphToScan = AstarPath.active.data.gridGraph;
-                //AstarPath.active.Scan(graphToScan);
+                }                             
             }
             
             
@@ -92,8 +86,6 @@ public class BuildingManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Delete))
         {
             Undo();
-            //var graphToScan = AstarPath.active.data.gridGraph;
-            //AstarPath.active.Scan(graphToScan);
         }
     }
 
@@ -101,11 +93,6 @@ public class BuildingManager : MonoBehaviour
     {
         if (mostRecentBuilt != null)
         {
-            
-            
-            
-            //player.AddGold(buildCost);
-            
             TurretBehavior turret = mostRecentBuilt.GetComponent<TurretBehavior>();
             
             turret.DestroyThisProperly();
@@ -191,14 +178,14 @@ public class BuildingManager : MonoBehaviour
             buildCost = cost * 100 + 10;
         }
         
-        //textEvents.UpdateStats();
+        
     }
 
     public int GetCost()
     {
         
         SetCost(SaveGameManager.Instance.SaveableObjects.Count());
-        //textEvents.UpdateStats();
+        
         return buildCost;
     }
 

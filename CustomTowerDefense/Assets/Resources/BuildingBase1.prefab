@@ -315,7 +315,7 @@ MonoBehaviour:
   damageLevel: 0
   rangeLevel: 0
   specialLevel: 0
-  shootTiming: 0.5
+  shootTiming: 0.3
   shootCooldown: 0
   stats: {fileID: 5622547998047622851}
   findClosestTool: {fileID: 4496566613408130811}

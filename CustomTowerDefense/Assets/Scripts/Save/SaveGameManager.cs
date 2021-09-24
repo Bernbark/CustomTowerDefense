@@ -1,7 +1,7 @@
-using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
-using Pathfinding;
+
 
 public class SaveGameManager : MonoBehaviour
 {
@@ -21,13 +21,9 @@ public class SaveGameManager : MonoBehaviour
         }
     }
 
-    Snap snappingTool;
-
     private void Awake()
     {
-        SaveableObjects = new List<SaveableObject>();
-        snappingTool = GetComponent<Snap>();
-        
+        SaveableObjects = new List<SaveableObject>();    
     }
 
     public void Save()
@@ -83,16 +79,11 @@ public class SaveGameManager : MonoBehaviour
                 
                 tmp.GetComponent<SaveableObject>().Load(value);
                 
-            }
-
-            
+            }          
         }
-
-
         AstarPath.active.Scan();
     }
     
-
     public Vector3 StringToVector(string value)
     {
         //(1, 2, 3)

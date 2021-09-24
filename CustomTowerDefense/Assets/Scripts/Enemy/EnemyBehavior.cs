@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using Pathfinding;
 using UnityEngine;
 
 public abstract class EnemyBehavior : MonoBehaviour
 {
     protected float valueMod;
-    private GameObject playerObj;
+    
     protected Player player;
     public float hp;
     public float maxHP;
@@ -24,26 +21,17 @@ public abstract class EnemyBehavior : MonoBehaviour
         maxHP = hp;
         value = hp;
         valueMod = KillsShopData.valueMod;
-        EnemyManager.Instance.enemies.Add(this);
-  
-        
+           
     }
-
-    // Update is called once per frame
     
-
-    
-
     public void OnTriggerEnter2D(Collider2D collision)
     {
         
         if (collision.transform.tag == "EndPoint")
-        {
-            
+        {            
             Destroy(this.gameObject);
             
             player.SubtractGoldFromLeak((int)value);
-            EnemyManager.Instance.enemies.Remove(this);
         }
     }
 
