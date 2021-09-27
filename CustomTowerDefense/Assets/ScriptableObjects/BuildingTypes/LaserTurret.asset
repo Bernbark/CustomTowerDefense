@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d04686522d1ed418c9b8aad7ed4c2c, type: 3}
   m_Name: LaserTurret
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  sprite: {fileID: 0}
-  name: 
+  prefab: {fileID: 7093289513744519805, guid: d3670c2207ba509429791a55b2379e92, type: 3}
+  sprite: {fileID: 21300000, guid: 3672be92d6460f948a040e188950e180, type: 3}
+  name: LaserTurret

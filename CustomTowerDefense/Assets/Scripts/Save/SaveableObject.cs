@@ -4,7 +4,7 @@ using UnityEngine;
 
 enum ObjectType
 {
-    SquareTurret, CircleTurret, ShotgunTurret
+    SquareTurret, CircleTurret, ShotgunTurret, LaserTurret
 }
 
 public abstract class SaveableObject : MonoBehaviour
@@ -24,6 +24,7 @@ public abstract class SaveableObject : MonoBehaviour
     {
         // 0-10  first number is level index, second is amount of objects
         PlayerPrefs.SetString(Application.loadedLevel+"-"+id.ToString(), objectType+"_"+transform.position.ToString()+"_"+save);
+        PlayerStats.Instance.SaveTowerLocations(objectType+"_"+transform.position.ToString()+"_"+save);
     }
 
     public virtual void Load(List<string> values)

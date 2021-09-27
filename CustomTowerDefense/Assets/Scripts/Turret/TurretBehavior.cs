@@ -81,13 +81,21 @@ public class TurretBehavior : MonoBehaviour
                     Destroy(Instantiate(cannonFirePrefab, cannonTip.transform.position, Quaternion.identity), .17f);
                 }
                 
-            } 
+            }
+         
         }
     }
 
     private void OnMouseEnter()
     {
-        UpgradeOverlay.Show_Static(this, (rangeLevel * 20 + 10), (damageLevel * 20 + 10));
+        if(this.gameObject.tag == "LaserTurret")
+        {
+            UpgradeOverlay.Show_Static(this, (rangeLevel * 2000 + 1000), (damageLevel * 2000 + 1000));
+        }
+        else
+        {
+            UpgradeOverlay.Show_Static(this, (rangeLevel * 20 + 10), (damageLevel * 20 + 10));
+        }
     }
 
     private void OnMouseExit()
@@ -98,25 +106,51 @@ public class TurretBehavior : MonoBehaviour
 
     public void UpgradeRange(int buyAmount)
     {
-        
-        if (player.GetGold() >= (rangeLevel * 20 + 10)*buyAmount)
+        if (this.gameObject.tag == "LaserTurret")
         {
-            range += .5f * buyAmount;
-            findClosestTool.AddRange(.5f * buyAmount);
-            player.SubtractGold((rangeLevel * 20 + 10)*buyAmount);
-            rangeLevel+=buyAmount;
+            if (player.GetGold() >= (rangeLevel * 2000 + 1000) * buyAmount)
+            {
+                range += .5f * buyAmount;
+                findClosestTool.AddRange(.5f * buyAmount);
+                player.SubtractGold((rangeLevel * 2000 + 1000) * buyAmount);
+                rangeLevel += buyAmount;
+            }
         }
+        else
+        {
+            if (player.GetGold() >= (rangeLevel * 20 + 10) * buyAmount)
+            {
+                range += .5f * buyAmount;
+                findClosestTool.AddRange(.5f * buyAmount);
+                player.SubtractGold((rangeLevel * 20 + 10) * buyAmount);
+                rangeLevel += buyAmount;
+            }
+        }
+        
         
     }
 
     public void UpgradeDamage(int buyAmount)
     {
-        if(player.GetGold() >= (damageLevel * 20 + 10)*buyAmount)
+        if(this.gameObject.tag == "LaserTurret")
         {
-            this.damage += 1 * buyAmount;
-            player.SubtractGold((damageLevel * 20 + 10)*buyAmount);
-            damageLevel+=buyAmount;
+            if (player.GetGold() >= (damageLevel * 2000 + 1000) * buyAmount)
+            {
+                this.damage += .1f * buyAmount;
+                player.SubtractGold((damageLevel * 2000 + 1000) * buyAmount);
+                damageLevel += buyAmount;
+            }
         }
+        else
+        {
+            if (player.GetGold() >= (damageLevel * 20 + 10) * buyAmount)
+            {
+                this.damage += 1 * buyAmount;
+                player.SubtractGold((damageLevel * 20 + 10) * buyAmount);
+                damageLevel += buyAmount;
+            }
+        }
+        
         
     }
 

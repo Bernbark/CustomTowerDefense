@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 {
     public float saveTimer = 0;
     public float statsUpdateCD = 0;
+    public string Name = "Bernbark";
     public int Gold = 20;
     public int Level;
     public int XPToLevel;

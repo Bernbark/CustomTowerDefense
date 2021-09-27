@@ -18,7 +18,7 @@ public class Laser : MonoBehaviour
         lineRenderer.enabled = false;
         tick = 0;
         oldTick = tick;
-        lc.DisableCollision();
+        //lc.DisableCollision();
 
 
 
@@ -36,12 +36,24 @@ public class Laser : MonoBehaviour
             lc.EnableCollision();
             lineRenderer.enabled = true;
         }
+        else
+        {
+            lc.DisableCollision();
+            lineRenderer.enabled = false;
+        }
         
+    }
+
+    public void SetNoEnemy()
+    {
+        enemyTransform = null;
     }
 
     public void SetEnemy(EnemyBehavior enemy)
     {
+        if(enemy != null)
         this.enemyTransform = enemy.transform;
+        
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -50,7 +62,7 @@ public class Laser : MonoBehaviour
         EnemyBehavior e = collision.gameObject.GetComponent<EnemyBehavior>();
         if (e)
         {
-
+            Debug.Log("Hit " + e + " with laser");
             e.TakeHit(tower.GetDamage());
         }
     }

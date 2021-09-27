@@ -293,7 +293,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9524591, y: 0.96999073}
+  m_Size: {x: 0.95, y: 0.95}
   m_EdgeRadius: 0
 --- !u!114 &6626455277563974250
 MonoBehaviour:
@@ -307,6 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ee89e4c2c1b374dba47c7f928015fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  laserPrefab: {fileID: 0}
   dartPrefab: {fileID: 1237301233406065792, guid: accae168ee85c52498f517bdf6196404, type: 3}
   buildingManager: {fileID: 7260298666520953439, guid: a539138b16d48a846bddd0e9c8b3cbad, type: 3}
   cannonFirePrefab: {fileID: 878900349361735139, guid: ee58141cf650d4d469d282e4d4c16850, type: 3}

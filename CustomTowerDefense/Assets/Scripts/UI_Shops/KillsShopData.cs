@@ -94,5 +94,8 @@ public class KillsShopData : MonoBehaviour
     {
         save = valueMod.ToString() + "_" + valueCost.ToString() + "_" + bloodPerSecond.ToString() + "_" + bloodPerSecondCost.ToString();
         PlayerPrefs.SetString("KILLS_SHOP", save);
+        Debug.Log(save);
     }
+
+    
 }

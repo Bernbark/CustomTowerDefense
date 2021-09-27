@@ -67,7 +67,9 @@ public class SaveGameManager : MonoBehaviour
                 case "CircleTurret":
                     tmp = Instantiate(Resources.Load("Circle") as GameObject);
                     break;
-
+                case "LaserTurret":
+                    tmp = Instantiate(Resources.Load("LaserTurret") as GameObject);
+                    break;
                 case "ShotgunTurret":
                     tmp = Instantiate(Resources.Load("ShotgunTurret") as GameObject);
                     

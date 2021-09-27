@@ -105,7 +105,7 @@ public class BuildingManager : MonoBehaviour
     {
         
         tower.DestroyThisProperly();
-        player.AddGold(GetCost());
+        player.AddGold(GetRefundPrice());
         AstarPath.active.Scan();
     }
 
@@ -173,11 +173,14 @@ public class BuildingManager : MonoBehaviour
         {
             buildCost = 10 * cost * 100 + 10;
         }
+        else if(activeBuildingType.name.Equals("LaserTurret"))
+        {
+            buildCost = cost * 100000 + 10000;
+        }
         else
         {
             buildCost = cost * 100 + 10;
         }
-        
         
     }
 
@@ -187,6 +190,25 @@ public class BuildingManager : MonoBehaviour
         SetCost(SaveGameManager.Instance.SaveableObjects.Count());
         
         return buildCost;
+    }
+
+    public int GetRefundPrice()
+    {
+        int refund;
+        int cost = SaveGameManager.Instance.SaveableObjects.Count();
+        if (UpgradeOverlay.GetTurret_Static().tag.Equals("ShotgunTurret"))
+        {
+            refund = 10 * cost * 100 + 10;
+        }
+        else if (UpgradeOverlay.GetTurret_Static().tag.Equals("LaserTurret"))
+        {
+            refund = cost * 100000 + 10000;
+        }
+        else
+        {
+            refund = cost * 100 + 10;
+        }
+        return refund;
     }
 
     

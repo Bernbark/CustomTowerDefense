@@ -40,6 +40,7 @@ public class ButtonHandlin : MonoBehaviour
     {
         SaveGameManager.Instance.Save();
         SaveSystem.SavePlayer(player);
+        PlayerStats.Instance.Save();
     }
 
     public void WipePlayerData(Button button)
@@ -47,12 +48,17 @@ public class ButtonHandlin : MonoBehaviour
         player.SetDefaultStats();
         List<GameObject> turrets = new List<GameObject>(GameObject.FindGameObjectsWithTag("Shotgun"));
         GameObject[] others = GameObject.FindGameObjectsWithTag("MachineGun");
-        foreach(GameObject obj in others)
+        GameObject[] laserTurrets = GameObject.FindGameObjectsWithTag("LaserTurret");
+        foreach (GameObject obj in others)
         {
             turrets.Add(obj);
         }
-        
-        foreach(GameObject turret in turrets)
+        foreach (GameObject turret in laserTurrets)
+        {
+            Destroy(turret);
+
+        }
+        foreach (GameObject turret in turrets)
         {
             Destroy(turret);
             

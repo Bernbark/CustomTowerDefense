@@ -65,8 +65,8 @@ public class UpgradeOverlay : MonoBehaviour
         this.rangeCost = rangeCost;
         this.damageCost = damageCost;
         RefreshRangeVisual();
-        rangetoolTip = "Range Upgrade = " + rangeCost * buyAmount;
-        damagetoolTip = "Damage Upgrade = " + damageCost * buyAmount;
+        RefreshToolTipText();
+        
         gameObject.SetActive(true);
         transform.position = tower.transform.position;
     }
@@ -80,21 +80,32 @@ public class UpgradeOverlay : MonoBehaviour
     {
         tower.UpgradeRange(buyAmount);
         RefreshRangeVisual();
-        rangetoolTip = "Range Upgrade = " + (tower.GetRangeLevel() * 20 + 10) * buyAmount;
+        RefreshToolTipText();
+        
         RefreshTooltip(rangetoolTip);
     }
 
     private void UpgradeDamage()
     {
         tower.UpgradeDamage(buyAmount);
-        damagetoolTip = "Damage Upgrade = " + (tower.GetDamageLevel() * 20 + 10) * buyAmount;
+        RefreshToolTipText();
+        
         RefreshTooltip(damagetoolTip);
     }
 
     private void RefreshToolTipText()
     {
-        rangetoolTip = "Range Upgrade = " + (tower.GetRangeLevel() * 20 + 10) * buyAmount;
-        damagetoolTip = "Damage Upgrade = " + (tower.GetDamageLevel() * 20 + 10) * buyAmount;
+        
+        if (tower.tag == "LaserTurret")
+        {
+            rangetoolTip = "Range Upgrade = " + (tower.GetRangeLevel() * 2000 + 1000) * buyAmount;
+            damagetoolTip = "Damage Upgrade = " + (tower.GetDamageLevel() * 2000 + 1000) * buyAmount;
+        }
+        else
+        {
+            rangetoolTip = "Range Upgrade = " + (tower.GetRangeLevel() * 20 + 10) * buyAmount;
+            damagetoolTip = "Damage Upgrade = " + (tower.GetDamageLevel() * 20 + 10) * buyAmount;
+        }
     }
 
     public void RefreshRangeVisual()
@@ -107,6 +118,16 @@ public class UpgradeOverlay : MonoBehaviour
         Hide();
         buildingManager.DestroyTurret(tower);
         Hide();
+    }
+
+    private TurretBehavior GetTurret()
+    {
+        return this.tower;
+    }
+
+    public static TurretBehavior GetTurret_Static()
+    {
+        return Instance.GetTurret();
     }
 
     public void RefreshTooltip(string tooltip)
