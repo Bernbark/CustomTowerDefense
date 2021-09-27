@@ -32,17 +32,26 @@ public class PlayerStats : MonoBehaviour
         {
             _instance = this;
         }
+        towers = "";
+        save = "";
     }
 
     public void Save()
     {
         FormSaveString();
         database.SaveToDatabase(save);
+        towers = "";
+        save = "";
     }
 
     public void SaveTowerLocations(string towerInfo)
     {
-        towers += towerInfo;
+        
+        
+        
+        
+        
+        towers += towerInfo +"_";
     }
 
     void FormSaveString()
